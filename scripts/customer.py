@@ -10,7 +10,7 @@ class SupermarketCustomer:
     transition prob matrix, possible initial loc array
     """
 
-    def __init__(self, state_space, initial_state_space, customer_state_dict, transition_prob_matrix=get_tpm(),
+    def __init__(self, state_space, initial_state_space, customer_state_dict, transition_prob_matrix,
                     inital_location_probabilities = get_initial_proba(), corona=False):
         self.state_space = state_space
         self.initial_state_space = initial_state_space

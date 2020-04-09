@@ -1,11 +1,12 @@
 from customer import SupermarketCustomer
-from operational import cust_per_min, cust_per_min_corona
+from operational import cust_per_min, cust_per_min_corona, get_tpm, get_tpm_corona
 
 import pandas as pd
 import numpy as np
 
 class Supermarket:
-    def __init__(self, days, customer_state_dict, customer_state_key, initial_customer_states, corona = False):
+    def __init__(self, days, customer_state_dict, customer_state_key,
+                initial_customer_states, corona = False):
         #self.cust_per_min = cust_per_min
         self.days = days
         self.customer_state_key = customer_state_key
@@ -14,8 +15,11 @@ class Supermarket:
         self.corona = corona
         if self.corona == True:
             self.cust_per_min = cust_per_min_corona()
+            self.transition_prob_matrix = get_tpm_corona()
         else:
             self.cust_per_min = cust_per_min()
+            self.transition_prob_matrix = get_tpm()
+
 
 
 
@@ -25,10 +29,12 @@ class Supermarket:
         cust_no = 0
         for i, row in self.cust_per_min.iterrows():
             nr_ppl = row['mean']
+            std = row['stdev']
+            upper = nr_ppl + std
             if nr_ppl > 0:
-                random_nr = np.random.choice(range(nr_ppl))
+                random_nr = np.random.randint(nr_ppl, upper+1)
                 for a in range(random_nr):
-                    customer = SupermarketCustomer(self.customer_state_key, self.initial_customer_states, self.customer_state_dict)
+                    customer = SupermarketCustomer(self.customer_state_key, self.initial_customer_states, self.customer_state_dict, self.transition_prob_matrix)
                     traj = customer.simulate()
                     cust_no = cust_no + 1
                     customer_number = customer_number.append({'time': str(i), 'customer_no':cust_no, 'locations': traj}, ignore_index = True)
