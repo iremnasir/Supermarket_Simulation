@@ -7,6 +7,9 @@ Simulating the customer behavior in a supermarket with Markov Chain Modeling, wi
     - Number of customers entering per minute in a day
     - How much time do people spend in specific aisles
 
+**Qualitatively there is no discrepancy between real data and simulation patterns**
+
+
 ## Keywords
   - Monte-Carlo simulation
   - Markov Chain modeling
@@ -15,7 +18,10 @@ Simulating the customer behavior in a supermarket with Markov Chain Modeling, wi
 ## Usage
     python main.py
 
+- Within main.py user can switch ```corona``` parameter on/off as well as the ```number of days``` to be simulated
+
 ## Improvements to be made
 
 - ~~Add reduced traffic within supermarket to Covid19 attribute~~
 - Add visualization script
+- Find ways to minimize the error introduced by randomly choosing the number of people enter per min (i.e. upper/lower bounds can be tweaked)
