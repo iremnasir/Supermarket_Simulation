@@ -23,5 +23,6 @@ Simulating the customer behavior in a supermarket with Markov Chain Modeling, wi
 ## Improvements to be made
 
 - ~~Add reduced traffic within supermarket to Covid19 attribute~~
+- Add docstrings and comments throughout the classes.
 - Add visualization script
 - Find ways to minimize the error introduced by randomly choosing the number of people enter per min (i.e. upper/lower bounds can be tweaked)
